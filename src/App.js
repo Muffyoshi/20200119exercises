@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import styled from 'styled-components'
 
+import GlobalStyle from './GlobalStyle'
 import Form from './Form'
 import List from './List'
 
@@ -33,6 +34,7 @@ const App = () => {
 
     return(
         <>
+            <GlobalStyle/>
             <Title>Todo APP</Title>
             <Form addTodo={addTodo}></Form>
             <List todos={todos} deleteTodo={deleteTodo} updateTodo={updateTodo}></List>
@@ -41,7 +43,9 @@ const App = () => {
 }
 
 const Title = styled.h1`
+    padding: 40px 0 ;
     text-align: center;
+    font-size: 4.0rem;
 `
 
 export default App

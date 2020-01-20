@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import Item from './Item'
 
@@ -8,12 +9,18 @@ const List = ({ todos, deleteTodo, updateTodo }) => {
     // const renderItem =　update ? itemUpdate() : itemContent() 
 
     return (
-        <ul>
+        <ItemList>
             {
                 todos.map((todo, index) => <Item id={index} content={todo} deleteTodo={deleteTodo} updateTodo={updateTodo}></Item>)
             }
-        </ul>
+        </ItemList>
     )
 }
+
+const ItemList = styled.ul `
+    /* margin-top: 50px; */
+    margin: 0 auto;
+    width: 450px;
+`
 
 export default List

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 
+import styled from 'styled-components'
+
 const Item = ({ id, content, deleteTodo, updateTodo }) => {
 
     const [isDone, setIsDone] = useState(false)
     const renderLine = isDone ? 'line-through':'none'
+    const defaultCheck = isDone ? 'checked':''
 
     const [update,setUpdate] = useState(false)    
     const [value, setValue] = useState('')
@@ -17,21 +20,26 @@ const Item = ({ id, content, deleteTodo, updateTodo }) => {
     const itemContent = () => {
         return(
             <>
-                <input 
-                    type="checkbox" 
-                    onChange={() => {
-                        setIsDone(!isDone)
-                    }} 
-                />
-                <span style={{textDecoration:renderLine}}>{content}</span>
-                <button
-                    onClick={handleDelete}
-                    >削除</button>
-                <button
-                    onClick={() => {
-                        setUpdate(!update)
-                    }} 
+                <ContentSide>
+                    <input
+                        type="checkbox" 
+                        onChange={() => {
+                            setIsDone(!isDone)
+                        }} 
+                        checked = {defaultCheck}
+                    />
+                    <TodoContent style={{textDecoration:renderLine}}>{content}</TodoContent>
+                </ContentSide>
+                <div>
+                    <button
+                        onClick={handleDelete}
+                        >削除</button>
+                    <button
+                        onClick={() => {
+                            setUpdate(!update)
+                        }} 
                     >更新</button>
+                </div>
             </>
         )
     }
@@ -40,14 +48,12 @@ const Item = ({ id, content, deleteTodo, updateTodo }) => {
         e.preventDefault()
         
         if(!value) {
-            setIsDone(false)
             setUpdate(!update)  
             return
         }
 
         updateTodo(id, value)
         setValue('')
-        setIsDone(false)
         setUpdate(!update)
     }
 
@@ -67,10 +73,29 @@ const Item = ({ id, content, deleteTodo, updateTodo }) => {
     const renderItem =　update ? itemUpdate() : itemContent() 
    
     return(
-        <li>
+        <TodoItem>
             {renderItem}
-        </li>
+        </TodoItem>
     )
 }
+
+const TodoItem = styled.li `
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const TodoContent = styled.p `
+    margin-left: 10px;
+    width: 200px;
+    font-size: 2.0rem;
+    word-break: break-all;
+` 
+
+const ContentSide = styled.div `
+    display: flex;
+    align-items: center;
+`
 
 export default  Item

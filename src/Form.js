@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+import styled from 'styled-components'
+
 const From = ({ addTodo }) => {
     const [value, setValue] = useState('')
 
@@ -17,15 +19,20 @@ const From = ({ addTodo }) => {
     }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <input
                 type="text"
                 onChange={e => {setValue(e.target.value)}}
                 value={value}    
             />
             <button type="submit">追加</button>
-        </form>
+        </Form>
     )
 }
+
+const Form = styled.form `
+    margin-top: 20px;
+    text-align: center;
+`
 
 export default From
