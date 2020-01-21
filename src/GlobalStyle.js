@@ -1,6 +1,8 @@
 import {createGlobalStyle} from 'styled-components'
 
 const GlobalStyle = createGlobalStyle `
+  /* 先頭で読み込んでみて下さい */
+  @import url('https://fonts.googleapis.com/css?family=M+PLUS+1p:100|Montserrat:100&display=swap');
 
   /* 
   html5doctor.com Reset Stylesheet
@@ -127,8 +129,6 @@ const GlobalStyle = createGlobalStyle `
     font-size: 2.0rem;
   }
 
-  /* フォント なぜかここでは効かなかった…。@importが駄目みたい　*/
-  @import url('https://fonts.googleapis.com/css?family=M+PLUS+1p:100|Montserrat:100&display=swap');
   body {
     font-family: 'M PLUS 1p', 'Montserrat', sans-serif;
   }
