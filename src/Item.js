@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 
 import styled from 'styled-components'
 
+import UpdateForm from './UpdateForm'
+
 const Item = ({ id, content, deleteTodo, updateTodo }) => {
 
     const [isDone, setIsDone] = useState(false)
     const renderLine = isDone ? 'line-through':'none'
     const defaultCheck = isDone ? 'checked':''
 
+    // updateFlgやisEditing等、真偽値であることを示す名称が良いです。
     const [update,setUpdate] = useState(false)    
-    const [value, setValue] = useState('')
+    // const [value, setValue] = useState('')
     
     
     const handleDelete = (e) => {
@@ -44,37 +47,42 @@ const Item = ({ id, content, deleteTodo, updateTodo }) => {
         )
     }
     
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    // 下記はコンポーネント化し、必要なprops(setValue等)を渡す形式にする手もあります。
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
         
-        if(!value) {
-            setUpdate(!update)  
-            return
-        }
+    //     if(!value) {
+    //         setUpdate(!update)  
+    //         return
+    //     }
 
-        updateTodo(id, value)
-        setValue('')
-        setUpdate(!update)
-    }
+    //     updateTodo(id, value)
+    //     setValue('')
+    //     setUpdate(!update)
+    // }
 
-    const itemUpdate = () => {
-        return(
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text"
-                    onChange={e => {setValue(e.target.value)}}
-                    value={value}
-                />
-                <button button type="submit">完了</button>
-            </form>
-        )
-    }
+    // const itemUpdate = () => {
+    //     return(
+    //         <form onSubmit={handleSubmit}>
+    //             <input 
+    //                 type="text"
+    //                 onChange={e => {setValue(e.target.value)}}
+    //                 value={value}
+    //             />
+    //             <button button type="submit">完了</button>
+    //         </form>
+    //     )
+    // }
     
-    const renderItem =　update ? itemUpdate() : itemContent() 
+    // const renderItem =　update ? itemUpdate() : itemContent() 
    
     return(
         <TodoItem>
-            {renderItem}
+            {
+                update ?
+                <UpdateForm /> :
+                itemContent()
+            }
         </TodoItem>
     )
 }
